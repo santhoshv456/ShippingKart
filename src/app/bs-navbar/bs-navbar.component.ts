@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-bs-navbar',
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent implements OnInit {
+export class BsNavbarComponent  {
 
-  constructor() { }
+  constructor(public auth:AuthService) {  
+    
+   }
 
-  ngOnInit() {
-  }
+   logout()
+   {
+     this.auth.logout();
+   }
 
 }
