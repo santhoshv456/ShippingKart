@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../auth.service';
+import { AppUser } from '../Models/AppUser';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -10,9 +11,11 @@ import { AuthService } from '../auth.service';
 export class BsNavbarComponent  {
 
   constructor(public auth:AuthService) {  
-    
+     this.auth.appUser$.subscribe(x=>this.appuser=x);
    }
 
+   appuser:AppUser;
+   
    logout()
    {
      this.auth.logout();

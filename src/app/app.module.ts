@@ -23,6 +23,8 @@ import { RouterModule } from '@angular/router'
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGaurdService } from './auth-gaurd.service';
+import { UserService } from './user.service';
+import { AdminAuthGuardService } from './admin-auth-guard.service';
 
 
 
@@ -57,13 +59,14 @@ import { AuthGaurdService } from './auth-gaurd.service';
       {path:'check-out',component:CheckOutComponent,canActivate:[AuthGaurdService]},
       {path:'order-success',component:OrderSuccessComponent,canActivate:[AuthGaurdService]},
       
-      {path:'admin/prodcuts',component:AdminProductsComponent,canActivate:[AuthGaurdService]},
-      {path:'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGaurdService]}
+      {path:'admin/prodcuts',component:AdminProductsComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]},
+      {path:'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]}
     ])
   ],
   providers: [
     AuthService,
-    AuthGaurdService
+    AuthGaurdService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
