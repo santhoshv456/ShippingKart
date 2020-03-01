@@ -25,6 +25,12 @@ import { AuthService } from './auth.service';
 import { AuthGaurdService } from './auth-gaurd.service';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { FormsModule } from '../../node_modules/@angular/forms';
+import { ProductService } from './product.service';
+
+import { CustomFormsModule } from 'ng2-validation';
 
 
 
@@ -40,10 +46,13 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CustomFormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -59,6 +68,8 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
       {path:'check-out',component:CheckOutComponent,canActivate:[AuthGaurdService]},
       {path:'order-success',component:OrderSuccessComponent,canActivate:[AuthGaurdService]},
       
+      {path:'admin/prodcuts/new',component:ProductFormComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]},
+      {path:'admin/prodcuts/:id',component:ProductFormComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]},
       {path:'admin/prodcuts',component:AdminProductsComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]},
       {path:'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGaurdService,AdminAuthGuardService]}
     ])
@@ -66,7 +77,9 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
   providers: [
     AuthService,
     AuthGaurdService,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
