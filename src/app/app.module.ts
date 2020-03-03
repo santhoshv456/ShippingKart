@@ -29,7 +29,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { CategoryService } from './category.service';
 import { FormsModule } from '../../node_modules/@angular/forms';
 import { ProductService } from './product.service';
-
+import { DataTableModule } from 'angular5-data-table';
 import { CustomFormsModule } from 'ng2-validation';
 
 
@@ -53,6 +53,7 @@ import { CustomFormsModule } from 'ng2-validation';
     BrowserModule,
     FormsModule,
     CustomFormsModule,
+    DataTableModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
