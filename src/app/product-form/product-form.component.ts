@@ -3,6 +3,7 @@ import { CategoryService } from '../category.service';
 import { ProductService } from '../product.service';
 import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { take } from '../../../node_modules/rxjs/operators';
+import { Products } from '../Models/Products';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { take } from '../../../node_modules/rxjs/operators';
 export class ProductFormComponent implements OnInit {
 
   categories$;
-  product={};
+  product;
   id;
 
   constructor(

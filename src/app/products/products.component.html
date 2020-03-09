@@ -1,1 +1,17 @@
-<p>products works!</p>
+<div class="row">
+  <div class="col-3">
+    <app-product-filter [category]="category"></app-product-filter>
+  </div>
+  <div class="col">
+    <div class="container px-lg-5">
+      <div class="row mx-lg-n5">
+        <ng-container *ngFor="let p of filteredProducts; let i=index">
+          <div class="col py-3 px-lg-5">
+            <app-prodcut-card [p]="p" [showActions]="true"></app-prodcut-card>
+          </div>
+          <div *ngIf="(i+1) % 2===0" class="w-100"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

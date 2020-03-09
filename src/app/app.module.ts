@@ -31,6 +31,8 @@ import { FormsModule } from '../../node_modules/@angular/forms';
 import { ProductService } from './product.service';
 import { DataTableModule } from 'angular5-data-table';
 import { CustomFormsModule } from 'ng2-validation';
+import { ProductFilterComponent } from './Products/product-filter/product-filter.component';
+import { ProdcutCardComponent } from './prodcut-card/prodcut-card.component';
 
 
 
@@ -47,7 +49,9 @@ import { CustomFormsModule } from 'ng2-validation';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProdcutCardComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,7 @@ import { CustomFormsModule } from 'ng2-validation';
     AngularFireAuthModule,
     NgbModule,
     RouterModule.forRoot([
-      {path:'',component:HomeComponent},
+      {path:'',component:ProductsComponent},
       {path:'products',component:ProductsComponent},
       {path:'login',component:LoginComponent},
       {path:'shopping-cart',component:ShoppingCartComponent},
