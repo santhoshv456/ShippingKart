@@ -1,4 +1,4 @@
-<div class="card" style="width: 16rem;">
+<div class="card" *ngIf="p.title" style="width: 16rem;">
     <img [src]="p.imageUrl" *ngIf="p.imageUrl" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title" *ngIf="p.title">{{p.title}}</h5>
