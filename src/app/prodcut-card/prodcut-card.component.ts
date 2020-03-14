@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Products } from '../Models/Products';
+import { ShoppingCartService } from '../shopping-cart.service';
+
 
 @Component({
   selector: 'app-prodcut-card',
@@ -7,10 +10,29 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProdcutCardComponent implements OnInit {
 
-  @Input('p') p;  
+  @Input('p') p:Products;  
   @Input('showActions') showActions;
+  @Input('shoppingcart') shoppingcart;
   
-  constructor() { }
+  constructor(private cartService:ShoppingCartService) { }
+
+  AddtoCart()
+  {
+     this.cartService.addTocart(this.p);      
+  }
+
+  removeFromCart()
+  {
+    this.cartService.removeFromCart(this.p);
+  }
+
+  getQuantity()
+  {
+     if(!this.shoppingcart) return 0;
+
+     let item=this.shoppingcart.items[this.p.$key];
+     return item? item.quantity:0;
+  }
 
   ngOnInit() {
   }
