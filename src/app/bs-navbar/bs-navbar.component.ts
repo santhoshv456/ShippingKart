@@ -3,6 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../auth.service';
 import { AppUser } from '../Models/AppUser';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { Observable } from 'rxjs';
+import { shoppingCart } from '../Models/shopping-cart';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -12,6 +14,8 @@ import { ShoppingCartService } from '../shopping-cart.service';
 export class BsNavbarComponent implements OnInit {
 
   quantity:number;
+  cart$:Observable<shoppingCart>;
+
 
   constructor(public auth:AuthService,private cartservice:ShoppingCartService) {  
     
@@ -27,16 +31,7 @@ export class BsNavbarComponent implements OnInit {
 async ngOnInit()
 {
    this.auth.appUser$.subscribe(x=>this.appuser=x);
-   let cart$ =await this.cartservice.getCart();
-   
-   cart$.subscribe(cart=>{
-       this.quantity=0;
-       
-       for(let productId in cart.items)
-       { 
-          this.quantity += cart.items[productId].quantity;
-       }
-   });
+   this.cart$ =await this.cartservice.getCart();
 
 }
 

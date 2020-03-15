@@ -51,7 +51,7 @@ import { ProdcutCardComponent } from './prodcut-card/prodcut-card.component';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProdcutCardComponent
+    ProdcutCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -28,9 +28,10 @@ export class ProdcutCardComponent implements OnInit {
 
   getQuantity()
   {
+
      if(!this.shoppingcart) return 0;
 
-     let item=this.shoppingcart.items[this.p.$key];
+     let item=this.shoppingcart.itemsMap[this.p.$key];
      return item? item.quantity:0;
   }
 
