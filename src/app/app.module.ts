@@ -33,6 +33,7 @@ import { DataTableModule } from 'angular5-data-table';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from './Products/product-filter/product-filter.component';
 import { ProdcutCardComponent } from './prodcut-card/prodcut-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 
 
@@ -52,6 +53,7 @@ import { ProdcutCardComponent } from './prodcut-card/prodcut-card.component';
     ProductFormComponent,
     ProductFilterComponent,
     ProdcutCardComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,

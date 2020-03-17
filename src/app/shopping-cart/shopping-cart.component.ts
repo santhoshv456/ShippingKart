@@ -10,7 +10,6 @@ export class ShoppingCartComponent implements OnInit {
 
   cart$;
 
-
   constructor(private shoppingcart:ShoppingCartService) { }
 
  async ngOnInit() {

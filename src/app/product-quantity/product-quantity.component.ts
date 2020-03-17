@@ -1,19 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Products } from '../Models/Products';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { shoppingCart } from '../Models/shopping-cart';
-
 
 @Component({
-  selector: 'app-prodcut-card',
-  templateUrl: './prodcut-card.component.html',
-  styleUrls: ['./prodcut-card.component.css']
+  selector: 'app-product-quantity',
+  templateUrl: './product-quantity.component.html',
+  styleUrls: ['./product-quantity.component.css']
 })
-export class ProdcutCardComponent implements OnInit {
+export class ProductQuantityComponent {
+  
 
   @Input('p') p:Products;  
-  @Input('showActions') showActions;
-  @Input('shoppingcart') shoppingcart:shoppingCart;
+  @Input('shoppingcart') shoppingcart;
   
   constructor(private cartService:ShoppingCartService) { }
 
@@ -22,7 +20,13 @@ export class ProdcutCardComponent implements OnInit {
      this.cartService.addTocart(this.p);      
   }
 
-  ngOnInit() {
+  removeFromCart()
+  {
+    this.cartService.removeFromCart(this.p);
   }
+
+  
+
+
 
 }

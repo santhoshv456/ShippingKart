@@ -52,7 +52,11 @@ export class ShoppingCartService {
     let cartId = await this.getOrCreateId();
     let item$=this.getCartItem(cartId,product.$key);
     item$.pipe(take(1)).subscribe(item=>{
-      item$.update({ product:product,quantity:(item.quantity || 0)+ change});
+      item$.update({ 
+        title:product.title,
+        imageUrl:product.imageUrl,
+        price:product.price,
+        quantity:(item.quantity || 0)+ change});
     });
   }
 
