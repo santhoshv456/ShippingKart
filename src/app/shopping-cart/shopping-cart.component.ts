@@ -16,4 +16,10 @@ export class ShoppingCartComponent implements OnInit {
     this.cart$=await this.shoppingcart.getCart();
   }
 
+  clearCart()
+  { 
+      console.log('im in');
+      this.shoppingcart.clearCart();
+  }
+
 }

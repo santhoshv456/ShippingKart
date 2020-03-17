@@ -20,17 +20,21 @@ export class ShoppingCartService {
   }
 
 
-  async getCart():Promise<Observable<shoppingCart>> {
-    let cartId=await this.getOrCreateId();
-    return this.db.object('/shopping-carts/' + cartId).pipe(map(x=>new shoppingCart(x.items)));
+  async clearCart() {
+    let cartId = await this.getOrCreateId();
+    this.db.object('/shopping-carts/' + cartId + '/items').remove();
   }
 
-  private getCartItem(cartId:string,productId:string)
-  {
-    return this.db.object('/shopping-carts/'+cartId+'/items/'+productId);   
+  async getCart(): Promise<Observable<shoppingCart>> {
+    let cartId = await this.getOrCreateId();
+    return this.db.object('/shopping-carts/' + cartId).pipe(map(x => new shoppingCart(x.items)));
   }
 
-  private async getOrCreateId():Promise<string> {
+  private getCartItem(cartId: string, productId: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
+  }
+
+  private async getOrCreateId(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
 
@@ -40,23 +44,29 @@ export class ShoppingCartService {
   }
 
   async addTocart(product: Products) {
-    this.updateQuantity(product,1);
+    this.updateQuantity(product, 1);
   }
 
   async removeFromCart(product: Products) {
-    this.updateQuantity(product,-1);
+    this.updateQuantity(product, -1);
   }
 
-  private async updateQuantity(product: Products,change:number)
-  {
+  private async updateQuantity(product: Products, change: number) {
     let cartId = await this.getOrCreateId();
-    let item$=this.getCartItem(cartId,product.$key);
-    item$.pipe(take(1)).subscribe(item=>{
-      item$.update({ 
-        title:product.title,
-        imageUrl:product.imageUrl,
-        price:product.price,
-        quantity:(item.quantity || 0)+ change});
+    let item$ = this.getCartItem(cartId, product.$key);
+    item$.pipe(take(1)).subscribe(item => {
+      let quantity = (item.quantity || 0) + change;
+      if (quantity === 0) {
+        item$.remove();
+      }
+      else {
+        item$.update({
+          title: product.title,
+          imageUrl: product.imageUrl,
+          price: product.price,
+          quantity: quantity
+        });
+      }
     });
   }
 
